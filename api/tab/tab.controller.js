@@ -15,6 +15,15 @@ exports.getTab = (req, res) => {
         });
 };
 
+exports.createTab = (req, res) => {
+    const tab = new Tab(req.body);
+    tab.saveAsync().then(tab => {
+        return res.json(tab);
+    }).catch(err => {
+        return res.json(err)
+    })
+};
+
 /*var tab = new Tab({
     tabName: 'angular2'
 })
