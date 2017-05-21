@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<div>
+42342
+</div>
+<script>
+    $(function() {
+        var data = {
+            name: 'itx1',
+            password: 12345,
+            passwordRepeat: 123456,
+            email: '97021898@qq.com'
+        };
+        $.post('/user/login', data, function(data) {
+            console.log(data);
+        })
+    });
+</script>
+</body>
+</html>
