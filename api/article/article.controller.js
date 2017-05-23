@@ -48,8 +48,7 @@ exports.getArticleById =(req, res) => {
     const _id = req.query._id;
     Article.findById(_id)
         .populate('tabsId')
-        .exec().then(function (article) {
-        console.log(article)
+        .exec().then(article => {
         if (!req.query.edit) {
             article.content = md.render(article.content);
             Article.update({_id: _id}, {$inc:{visitCount:1}}, (err) => {
@@ -58,7 +57,26 @@ exports.getArticleById =(req, res) => {
         }
         article.visitCount++;
         return res.json(article.info);
-    }).then(null,function (err) {
+    }).then(null, (err) => {
+        return res.status(500).send();
+    });
+};
+
+exports.editArticle = (req, res) => {
+    const _id = req.body._id;
+    Article.findById(_id)
+        .exec().then(article => {
+        if (article) {
+            Article.update({_id: _id}, req.body, (err) => {
+                if (err) console.log(err)
+            });
+        }
+        return res.json({
+            code: 1,
+            message: '修改成功'
+        });
+
+    }).then(null, (err) => {
         return res.status(500).send();
     });
 };

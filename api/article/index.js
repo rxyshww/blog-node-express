@@ -9,6 +9,6 @@ const controller = require('./article.controller');
 router.post('/addArticle', controller.addArticle);
 router.get('/getArticle', controller.getArticle);
 router.get('/getArticleById', controller.getArticleById);
-
+router.post('/editArticle', controller.editArticle);
 
 module.exports = router;
